@@ -3,8 +3,6 @@ pragma solidity ^0.8.0;
 
 
 
-
-
 contract FizzyTrade {
 
   enum Status {
@@ -51,15 +49,13 @@ contract FizzyTrade {
   }
 
 
-
-
-  address private owner;
+  address private owner; // Owner of the contract
 
   Promise[] private promises;
   mapping(address => uint[]) private buyerPromises;
   mapping(address => uint[]) private sellerPromises;
 
-  uint private feesToPay = 0;
+  uint private feesToPay = 0; // Fees available for the owner to withdraw
 
 
   constructor() {
@@ -85,6 +81,9 @@ contract FizzyTrade {
     sellerPromises[seller].push(promises.length-1);
   }
 
+  /**
+   * Create a promise with a custom deposit amount.
+   */
   function createCustomPromise(address seller, uint price, uint deposit) public payable {
     uint fee = deposit / 2;
     require(msg.value == price + fee + deposit, "Value sent does not match price + fee + deposit");
@@ -93,10 +92,16 @@ contract FizzyTrade {
     sellerPromises[seller].push(promises.length-1);
   }
 
+  /*
+   * Get list of Ids where the sender address is the buyer.
+   */
   function getMyBuyerPromiseIds() public view returns (uint[] memory){
     return buyerPromises[msg.sender];
   }
 
+  /*
+   * Get list of Ids where the sender address is the seller.
+   */
   function getMySellerPromiseIds() public view returns (uint[] memory) {
     return sellerPromises[msg.sender];
   }
