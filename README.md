@@ -26,6 +26,7 @@ An added benefit of the fee being returned in the event of a burned promise is t
 Currently, the fee is set at half the value of the deposit.
 
 ### TODO (in no particular order):
+- Allow for custom deposits with different amounts for each party.
 - Add erc-721 functionality to the promises so a seller could sell the rights to collect the purchase price to a shipper who would then be responsible for getting the product to the buyer. This would require promises storing data on what the off chain good being bought is.
 - Add the option to buy with erc-20 tokens instead of ether if feasible
 - Write version in Cairo if the fees on starknet are low enough to warrant it relative to other layer twos
